@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Project_work.Models.DbModels.Student>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1 class="alert-dark text-center">All students info choosing course list</h1>
+<p class="d-flex justify-content-end">
+    <a asp-action="Create" class="btn btn-primary">Create New</a>
+</p>
+
+@foreach (var item in Model)
+{
+
+    <div class="card" style="background-color:lightcyan">
+        <div class="card-header">
+            <div class="d-flex justify-content-center">
+                <img src="@item.Picture" width="100" class="rounded-circle" />
+            </div>
+            <div class="d-flex justify-content-around">
+                <span style="font-size:25px"><strong>Name : @item.StudentName</strong></span>
+                <span style="font-size:25px"><strong>BirthDate : @item.BirthDate.ToString("dd-MM-yyyy")</strong></span>
+                <span style="font-size:25px"><strong>Age : @item.Age</strong></span>
+            </div>
+        </div>
+        <div class="card-body">
+            <table class="table table-bordered table-striped table-sm">
+                <thead>
+                    <tr>
+                        <th>CourseId</th>
+                        <th>CourseName</th>
+                        <th>CourseFee</th>
+                        <th>IsAvailable</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var singleEntry in item.EntryCourses)
+                    {
+                        <tr>
+                            <td>@singleEntry.CourseId</td>
+                            <td>@singleEntry.Course.CourseName</td>
+                            <td>@singleEntry.Course.Fee</td>
+                            <td>@singleEntry.Course.Available</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="card-footer">
+            <a class="btn btn-success btn-sm" asp-action="Edit" asp-controller="Student" asp-route-id="@item.StudentId">Edit</a>
+            <a class="btn btn-danger btn-sm" asp-action="Delete" asp-controller="Student" asp-route-id="@item.StudentId">Delete</a>
+        </div>
+    </div>
+    <br />
+}

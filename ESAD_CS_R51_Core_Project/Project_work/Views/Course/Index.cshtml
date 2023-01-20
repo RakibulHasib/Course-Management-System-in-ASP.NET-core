@@ -1,0 +1,37 @@
+﻿@model IEnumerable<Project_work.Models.DbModels.Course>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1 class="text-center alert-info" >All Course information</h1>
+<p>
+    <a asp-action="Create" class="btn btn-primary">Create New</a>
+</p>
+
+<table class="table table-bordered table-hover table-sm">
+    <thead>
+        <tr>
+            <th>Course Name</th>
+            <th>Fee</th>
+            <th>Available</th>
+            <th>Course title</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item1 in Model)
+        {
+            <tr>
+                <td>@item1.CourseName</td>
+                <td>@item1.Fee</td>
+                <td>@item1.Available</td>
+                <td>@item1.CourseTitle.CourseTitleName</td>
+                <td>
+                    <a class="btn btn-success btn-sm" asp-action="Edit" asp-controller="Course" asp-route-id="@item1.CourseId">Edit</a>
+                    <a class="btn btn-danger btn-sm" asp-action="Delete" asp-controller="Course" asp-route-id="@item1.CourseId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

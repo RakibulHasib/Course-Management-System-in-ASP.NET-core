@@ -1,0 +1,13 @@
+﻿@model Project_work.Models.ViewModel.CourseViewModel
+<div class="form-group row mb-1">
+
+    <div class="col-5 d-flex justify-content-between">
+        @Html.DropDownListFor(x=>x.CourseId, ViewBag.Course as SelectList,"--Select--",htmlAttributes:new{@class="form-control singleCourseDropdown"})
+    </div>
+    <div class="col-5 d-flex justify-content-between">
+        @Html.TextBoxFor(x => x.Fee, new { @class = "form-control course-price", @readonly = "true" })
+    </div>
+    <div class="col-2">
+        <a class="btn btn-danger text-white" id="btnDeleteSpot">Delete</a>
+    </div>
+</div>

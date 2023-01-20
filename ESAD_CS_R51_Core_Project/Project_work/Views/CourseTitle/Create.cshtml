@@ -1,0 +1,25 @@
+﻿@model Project_work.Models.DbModels.CourseTitle
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1 class="alert-light text-center">Create new course title</h1>
+<form asp-action="Create" method="post">
+    <div class="row">
+        <div class="offset-2 col-8">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="CourseTitleName" class="control-label"></label>
+                <input asp-for="CourseTitleName" class="form-control mt-2" />
+                <span asp-validation-for="CourseTitleName" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <div class="offset-2 form-group mt-2">
+        <input type="submit" value="Create" class="btn btn-primary" />
+    </div>
+</form>
+
+<div class="offset-2 mt-2">
+    <a asp-action="Index">Back to List</a>
+</div>

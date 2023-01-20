@@ -1,0 +1,29 @@
+﻿@model IEnumerable<Project_work.Models.DbModels.CourseTitle>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1 class="alert-light text-center">All Course title</h1>
+<p class="d-flex justify-content-end">
+    <a asp-action="Create" class="btn btn-primary">Create New</a>
+</p>
+<table class="table table-bordered table-hover table-sm text-center">
+    <thead>
+        <tr>
+            <th>Course Title Name</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item1 in Model)
+        {
+            <tr>
+                <td>@item1.CourseTitleName</td>
+                <td>
+                    <a class="btn btn-success btn-sm" asp-action="Edit" asp-controller="CourseTitle" asp-route-id="@item1.CourseTitleId">Edit</a>
+                    <a class="btn btn-danger btn-sm" asp-action="Delete" asp-controller="CourseTitle" asp-route-id="@item1.CourseTitleId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

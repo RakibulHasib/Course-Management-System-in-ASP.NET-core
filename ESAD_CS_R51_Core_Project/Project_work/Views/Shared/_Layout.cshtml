@@ -1,0 +1,103 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Project_work</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Project_work.styles.css" asp-append-version="true" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script>
+        function LoadCourse(CourseId = null) {
+
+            var courseContainer = $("#courseContainer")
+            $.ajax({
+                url: "/Student/AddNewCourse/" + CourseId ?? "",
+                type: "GET",
+                success: function (data) {
+                    courseContainer.append(data);
+                }
+            });
+        }
+        //Change dropdown of product list to get the price (Add new order)
+        $(document).on("change", ".singleCourseDropdown", function () {
+
+            var priceBox = $(this).parent().parent().find(".course-price");
+
+            $.ajax({
+                type: "POST",
+                url: '/Student/GetFee/' + $(this).val(),
+                dataType: "json",
+                success: data => {
+                    priceBox.val(data);
+                }
+            });
+        });
+
+        $(document).on("click", "#btnPlus", function (e) {
+            e.preventDefault();
+            LoadCourse();
+        });
+
+        $(document).on("click", "#btnDeleteSpot", function (e) {
+            e.preventDefault();
+            $(this).parent().parent().remove();
+        });
+
+    </script>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-info border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" style="color:white" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/Images/isdb.jpg" width="40"/></a>
+                <a class="navbar-brand" style="color:white" asp-area="" asp-controller="Home" asp-action="Index">IsDB-BISEW</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link" style="color:white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" style="color:white" asp-area="" asp-controller="Role" asp-action="Index">RoleManager</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" style="color:white" asp-area="" asp-controller="Role" asp-action="AssignRole">AssignRole</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" style="color:white" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Student Management
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <li><a class="dropdown-item text-dark" asp-area="" asp-controller="Student" asp-action="Index">Student Info</a></li>
+                                <li><a class="dropdown-item text-dark" asp-area="" asp-controller="Course" asp-action="Index">Course</a></li>
+                                <li><a class="dropdown-item text-dark" asp-area="" asp-controller="CourseTitle" asp-action="Index">CourseTitle</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <partial name="_LoginPartial" />
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container text-center">
+            &copy; 2023 - Course Management System - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,42 @@
+﻿@model Project_work.Models.DbModels.Course
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1 class="text-center alert-info">Create a new Course</h1>
+
+<form asp-action="Create" method="post">
+    <div class="row">
+        <div class="offset-2 col-8">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="CourseName" class="control-label"></label>
+                <input asp-for="CourseName" class="form-control" />
+                <span asp-validation-for="CourseName" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-1">
+                <label asp-for="Fee" class="control-label"></label>
+                <input asp-for="Fee" class="form-control" />
+                <span asp-validation-for="Fee" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-1">
+                <label asp-for="Available" class="control-label"></label>
+                <input asp-for="Available" type="checkbox"/>
+                <span asp-validation-for="Available" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-1">
+                <label asp-for="CourseTitleId" class="control-label"></label>
+                <select asp-for="CourseTitleId" class="form-control" asp-items="ViewBag.CourseTitleId"></select>
+                <span asp-validation-for="CourseTitleId" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="offset-2 form-group mt-2">
+        <input type="submit" value="Create" class="btn btn-primary" />
+    </div>
+</form>
+
+<div class="offset-2 mt-2">
+    <a asp-action="Index">Back to List</a>
+</div>
